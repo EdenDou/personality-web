@@ -1,0 +1,704 @@
+:root {
+    --primary-color: #2c3e50;    /* 深蓝色主题 */
+    --secondary-color: #34495e;   /* 次要颜色 */
+    --accent-color: #3498db;      /* 强调色 */
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --light-gray: #ecf0f1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-image: url('/image/背景.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;  /* 固定背景，产生视差效果 */
+    background-repeat: no-repeat;
+}
+
+/* 添加半透明遮罩层，使内容更易读 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);  /* 白色半透明遮罩 */
+    z-index: -1;
+}
+
+/* 调整内容区域的背景透明度 */
+.hero, .life-photos-section,
+.about-section,
+.experience-section,
+.skills-section,
+.projects-section,
+.contact-section {
+    background-color: rgba(255, 255, 255, 0.85);
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.hero .lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* 欢迎文字样式 */
+.welcome-text {
+    font-size: 2rem;
+    color: #333;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero .lead {
+        font-size: 1.2rem;
+    }
+    
+    .welcome-text {
+        font-size: 1.4rem;
+    }
+} 
+
+/* 头像样式 */
+.hero img {
+    max-width: 300px;  /* 控制最大宽度 */
+    height: 300px;     /* 确保宽高相等 */
+    object-fit: cover; /* 保持图片比例并填充容器 */
+    border: 5px solid white;
+    border-radius: 50%;  /* 创建完美的圆形 */
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+} 
+
+/* 生活照片轮播样式 */
+.life-photos-section {
+    padding: 60px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.carousel {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    background: rgba(0,0,0,0.2);
+}
+
+.carousel-indicators {
+    margin-bottom: 1rem;
+}
+
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+/* 如果在手机上需要更小的尺寸 */
+@media (max-width: 768px) {
+    .carousel {
+        max-width: 100%;
+    }
+    .carousel-item img {
+        height: 300px;
+    }
+}
+
+/* 导航栏样式调整 */
+.navbar {
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);  /* 毛玻璃效果 */
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    margin: 0 15px;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 8px 15px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-brand {
+    color: var(--text-color) !important;
+    font-weight: 700;
+    font-size: 1.3rem;  /* 稍微调小一点，因为文字变长了 */
+    letter-spacing: 1px;
+    padding: 8px 0;
+    position: relative;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar-nav {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        margin: 0 8px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 内容区域样式调整 */
+.content-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 2;
+    margin-top: 56px;
+    box-shadow: none;
+}
+
+/* 通用部分样式 */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--text-color);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* 教育背景样式 */
+.education-list {
+    list-style: none;
+    padding: 0;
+}
+
+.education-list li {
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 20px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.education-list .year {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.education-list h4 {
+    margin: 5px 0;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* 工作经历时间轴样式 */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+}
+
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    width: 50%;
+    padding-right: 40px;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-right: 0;
+    padding-left: 40px;
+}
+
+.timeline-badge {
+    position: absolute;
+    right: -13px;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+    text-align: center;
+    line-height: 26px;
+    font-size: 0.8rem;
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+.timeline-item:nth-child(even) .timeline-badge {
+    right: auto;
+    left: -13px;
+}
+
+.timeline-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.timeline-content h4 {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.timeline-content ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.timeline-content li {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+/* 技能进度条样式 */
+.skill-category {
+    margin-bottom: 40px;
+}
+
+.skill-category h3 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.skill-item {
+    margin-bottom: 20px;
+}
+
+.skill-name {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.progress {
+    height: 8px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    transition: width 1.5s ease-in-out;
+    border-radius: 5px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 70px;
+    }
+    
+    .timeline-badge {
+        left: 17px;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-badge {
+        left: 17px;
+    }
+}
+
+/* 联系方式样式更新 */
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.contact-list li:hover {
+    transform: translateX(10px);
+    background: linear-gradient(45deg, var(--light-gray), #fff);
+}
+
+.contact-list i {
+    color: var(--accent-color);
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+/* 按钮美化 */
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* 图片美化 */
+.hero img {
+    max-width: 300px;  /* 控制最大宽度 */
+    height: 300px;     /* 确保宽高相等 */
+    object-fit: cover; /* 保持图片比例并填充容器 */
+    border: none;
+    box-shadow: 20px 20px 60px #d1d9e6, -20px -20px 60px #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.hero img:hover {
+    transform: scale(1.02);
+}
+
+/* 轮播图美化 */
+.carousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel:hover .carousel-item img {
+    transform: scale(1.02);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    background: rgba(0,0,0,0.2);
+}
+
+.carousel-indicators {
+    margin-bottom: 1rem;
+}
+
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+/* 如果在手机上需要更小的尺寸 */
+@media (max-width: 768px) {
+    .carousel {
+        max-width: 100%;
+    }
+    .carousel-item img {
+        height: 300px;
+    }
+}
+
+/* 添加玻璃态效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* 添加渐变背景 */
+.gradient-bg {
+    background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+/* 添加悬浮卡片效果 */
+.hover-card {
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* 添加动态边框效果 */
+.animated-border {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    animation: borderAnimation 2s infinite;
+}
+
+@keyframes borderAnimation {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* 添加动画效果 */
+.hero h1,
+.hero .lead,
+.hero .btn-primary {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero h1 { animation-delay: 0.3s; }
+.hero .lead { animation-delay: 0.6s; }
+.hero .btn-primary { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 导航链接悬停效果 */
+.nav-link {
+    position: relative;
+    padding: 8px 15px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 技能进度条动画 */
+.progress-bar {
+    width: 0;
+    transition: width 1.5s ease;
+}
+
+/* 卡片悬停效果 */
+.timeline-content,
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover,
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* 运动鞋展示样式 */
+.projects-section {
+    padding: 60px 0;
+    background-color: var(--light-gray);
+}
+
+.shoe-display {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;  /* 增加内边距 */
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#shoesCarousel .carousel-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;  /* 保持图片原比例 */
+    background-color: white;
+    transition: transform 0.3s ease;
+    padding: 20px;  /* 给图片添加内边距 */
+}
+
+#shoesCarousel .carousel-control-prev,
+#shoesCarousel .carousel-control-next {
+    width: 5%;
+    opacity: 0.7;
+    background: rgba(0,0,0,0.1);
+    border-radius: 50%;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#shoesCarousel .carousel-control-prev {
+    left: 20px;
+}
+
+#shoesCarousel .carousel-control-next {
+    right: 20px;
+}
+
+#shoesCarousel .carousel-control-prev-icon,
+#shoesCarousel .carousel-control-next-icon {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    padding: 15px;
+}
+
+/* 添加额外的背景容器 */
+.shoe-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+/* 年龄信息样式 */
+.age-info {
+    color: var(--secondary-color);
+    margin: 10px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.age-info i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
