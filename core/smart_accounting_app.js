@@ -3,6 +3,7 @@
 class SmartAccountingApp {
   constructor() {
     this.bills = []; // Store categorized bills
+    this.chartInstance = null; // Store Chart.js instance
   }
 
   // Function to parse and classify bills
@@ -40,7 +41,13 @@ class SmartAccountingApp {
   renderPieChart() {
     const ctx = document.getElementById('chart'); // Ensure you have a canvas tag with id 'chart'
     const data = this.generateCategoryData();
-    return new Chart(ctx.getContext('2d'), {
+    
+    // Destroy any existing chart to avoid overlapping
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+    }
+
+    this.chartInstance = new Chart(ctx.getContext('2d'), {
       type: 'pie',
       data: {
         labels: Object.keys(data),
@@ -50,6 +57,10 @@ class SmartAccountingApp {
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'], // Dynamic or fixed colors
           },
         ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }
@@ -77,13 +88,16 @@ class SmartAccountingApp {
 
 // Example Usage
 const app = new SmartAccountingApp();
-app.addBill('restaurant dinner', 45);
-app.addBill('grocery shopping', 20);
-app.addBill('taxi ride', 15);
-app.addBill('movie ticket', 12);
 
-// Render chart and display advice
-window.onload = () => {
-  app.renderPieChart(); // Ensure a <canvas> element exists on the HTML page
-  console.log(app.provideFinancialAdvice());
-};
+document.getElementById('add-bill').addEventListener('click', () => {
+  const description = document.getElementById('description').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  if (description && !isNaN(amount)) {
+    app.addBill(description, amount);
+    app.renderPieChart();
+    // Optionally display advice in a UI element
+    console.log(app.provideFinancialAdvice());
+  } else {
+    alert('Please enter a valid description and amount.');
+  }
+});
